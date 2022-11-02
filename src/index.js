@@ -5,9 +5,9 @@ import { fetchCountries } from './js/fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 
-const inputEl = document.getElementById('search-box');
-const listEl = document.querySelector('.country-list');
-const infoEl = document.querySelector('.country-info');
+const input = document.getElementById('search-box');
+const list = document.querySelector('.country-list');
+const info = document.querySelector('.country-info');
 
 const cleanMarkup = ref => (ref.innerHTML = '');
 
@@ -15,8 +15,8 @@ const inputHandler = e => {
   const textInput = e.target.value.trim();
 
   if (!textInput) {
-    cleanMarkup(listEl);
-    cleanMarkup(infoEl);
+    cleanMarkup(list);
+    cleanMarkup(info);
     return;
   }
 
@@ -30,21 +30,21 @@ const inputHandler = e => {
       renderMarkup(data);
     })
     .catch(err => {
-      cleanMarkup(listEl);
-      cleanMarkup(infoEl);
+      cleanMarkup(list);
+      cleanMarkup(info);
       Notify.failure('Oops, there is no country with that name');
     });
 };
 
 const renderMarkup = data => {
   if (data.length === 1) {
-    cleanMarkup(listEl);
+    cleanMarkup(list);
     const markupInfo = createInfoMarkup(data);
-    infoEl.innerHTML = markupInfo;
+    info.innerHTML = markupInfo;
   } else {
-    cleanMarkup(infoEl);
+    cleanMarkup(info);
     const markupList = createListMarkup(data);
-    listEl.innerHTML = markupList;
+    list.innerHTML = markupList;
   }
 };
 
@@ -69,4 +69,4 @@ const createInfoMarkup = data => {
   );
 };
 
-inputEl.addEventListener('input', debounce(inputHandler, DEBOUNCE_DELAY));
+input.addEventListener('input', debounce(inputHandler, DEBOUNCE_DELAY));
