@@ -70,3 +70,5 @@ const createInfoMarkup = data => {
 };
 
 input.addEventListener('input', debounce(inputHandler, DEBOUNCE_DELAY));
+
+// test 12
